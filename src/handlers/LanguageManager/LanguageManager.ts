@@ -16,7 +16,7 @@ export default class LanguageManager {
 				const json = JSON.parse(file);
 				if (!json) continue;
 
-				this.languages.set(languageFile.split('.')[0], json);
+				this.languages.set(languageFile.split('.')[0].split('_')[0], json);
 				console.log(Prefixes.LANGUAGE + `loaded language: ` + languageFile.split('.')[0]);
 			} catch (ignored) {}
 		}
