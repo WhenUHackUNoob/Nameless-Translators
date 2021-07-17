@@ -1,7 +1,7 @@
 {
     "general": {
-        "ping": "🏓 Latence je <PING>ms. Latence API je <API>ms",
-        "usage": "Použití: `<usage>`"
+        "ping": "🏓 Latence je {ping}ms. Latence API je {api}ms",
+        "usage": "Použití: `{usage}`"
     },
     "stats": {
         "no_data_found": "Pro zadaný jazyk nebyla nalezena žádná data",
@@ -10,8 +10,8 @@
         "no_country_found": "Zadanou zemi jsem nenašel."
     },
     "lang": {
-        "current_language": "Váš současný jazyk je `<language>`",
-        "changed_language": "Váš jazyk byl úspěšně změněn na `<language>`",
-        "invalid_language": "Takový jazyk neznám. Můžete si vybrat z: <languages>"
+        "current_language": "Váš současný jazyk je `{language}`",
+        "changed_language": "Váš jazyk byl úspěšně změněn na `{language}`",
+        "invalid_language": "Takový jazyk neznám. Můžete si vybrat z: {languages}"
     }
 }
