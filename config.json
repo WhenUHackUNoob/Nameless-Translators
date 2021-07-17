@@ -1,5 +1,5 @@
 {
-	"prefix": ".",
+	"prefix": "n.",
 	"modules": {
 		"misc": true,
 		"stats": true

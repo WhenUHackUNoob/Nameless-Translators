@@ -5,6 +5,8 @@
 
 	"stats": {
 		"no_data_found": "No data was found for the specified language",
-		"no_country_found": "I could not find the country you provided."
+		"no_country_found": "I could not find the country you provided.",
+		"choose_country_emote": "Please react on this message with an emote selecting a country.",
+		"choose_country_emote_title": "Language Selection"
 	}
 }

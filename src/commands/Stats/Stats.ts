@@ -81,8 +81,15 @@ export default class StatsCommand extends Command {
 				for (let i = 0; i < languages.length; i++) {
 					description.push(`${discord_emotes[i]} ${languages[i].name}`);
 				}
-				const embed = Embeds.success(`React with the emote of the language you want to choose\n` + description.join('\n'));
-				embed.setTitle("Choose language");
+
+				const langKey = await LanguageManager.getString(msg.author.id, 'stats.choose_country_emote')
+				if(!langKey) return msg.channel.send('We encountered an error. Please try again.')
+
+				const langKeyA = await LanguageManager.getString(msg.author.id, 'stats.choose_country_emote_title')
+				if(!langKeyA) return msg.channel.send('We encountered an error. Please try again.')
+
+				const embed = Embeds.success(`${langKey}\n` + description.join('\n'));
+				embed.setTitle(langKeyA);
 
 				const message = await msg.channel.send({ embeds: [ embed ]});
 				for (let i = 0; i < languages.length; i++) {
