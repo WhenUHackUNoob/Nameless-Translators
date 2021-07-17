@@ -35,11 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -49,6 +44,7 @@ var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
 var Prefixes_1 = __importDefault(require("../../constants/Prefixes"));
 var LanguageModel_1 = __importDefault(require("../../db/model/LanguageModel"));
+var DEFAULT_LANGUAGE = "en_UK";
 var LanguageManager = /** @class */ (function () {
     function LanguageManager() {
     }
@@ -73,44 +69,60 @@ var LanguageManager = /** @class */ (function () {
             placeholders[_i - 2] = arguments[_i];
         }
         return __awaiter(this, void 0, void 0, function () {
-            var languageCode, data, languageData, keys, result, _a, keys_1, key_1, i, k, v;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (!(user == "fallback")) return [3 /*break*/, 1];
-                        languageCode = "en_UK";
-                        return [3 /*break*/, 5];
-                    case 1: return [4 /*yield*/, LanguageModel_1.default.findOne({ where: { userID: user } })];
-                    case 2:
-                        data = _b.sent();
-                        if (!!data) return [3 /*break*/, 4];
-                        return [4 /*yield*/, LanguageModel_1.default.create({ userID: user, language: 'en_UK' })];
-                    case 3:
-                        data = _b.sent();
-                        _b.label = 4;
-                    case 4:
-                        languageCode = data.get('language');
-                        _b.label = 5;
-                    case 5:
-                        languageData = this.languages.get(languageCode);
-                        if (!languageData)
-                            return [2 /*return*/, this.getString.apply(this, __spreadArray(["fallback", key], placeholders))];
-                        keys = key.split('.');
-                        result = languageData;
-                        for (_a = 0, keys_1 = keys; _a < keys_1.length; _a++) {
-                            key_1 = keys_1[_a];
-                            result = result[key_1];
-                            if (!result) {
-                                console.log(Prefixes_1.default.LANGUAGE + ("No language key found for: " + key_1));
-                                return [2 /*return*/, this.getString.apply(this, __spreadArray(["fallback", key_1], placeholders))];
-                            }
+            var language, translations, translation, i, k, v;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getLanguage(user)];
+                    case 1:
+                        language = _a.sent();
+                        translations = this.languages.get(language);
+                        translation = this.getTranslation(translations, key);
+                        if (!translation) {
+                            translations = this.languages.get(DEFAULT_LANGUAGE);
+                            translation = this.getTranslation(translations, key);
+                        }
+                        if (!translation) {
+                            // We are already the default translation so the term is not set
+                            console.log(Prefixes_1.default.BOT + ("Term '" + key + "' is missing from default (" + DEFAULT_LANGUAGE + ") translation"));
+                            return [2 /*return*/, undefined];
                         }
                         for (i = 0; i < placeholders.length; i += 2) {
                             k = placeholders[i];
                             v = placeholders[i + 1];
-                            result = result.replace(k, v);
+                            translation = translation.split("{" + k + "}").join(v); // .replaceAll doesn't exist so I guess we use this
                         }
-                        return [2 /*return*/, result];
+                        return [2 /*return*/, translation];
+                }
+            });
+        });
+    };
+    LanguageManager.getTranslation = function (json, key) {
+        var keys = key.split('.');
+        var result = json;
+        for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+            var k = keys_1[_i];
+            result = result[k];
+            if (!result) {
+                console.log(Prefixes_1.default.LANGUAGE + ("No language key found for: " + key));
+                return undefined;
+            }
+        }
+        return result;
+    };
+    LanguageManager.getLanguage = function (user) {
+        return __awaiter(this, void 0, void 0, function () {
+            var data;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, LanguageModel_1.default.findOne({ where: { userID: user } })];
+                    case 1:
+                        data = _a.sent();
+                        if (!!data) return [3 /*break*/, 3];
+                        return [4 /*yield*/, LanguageModel_1.default.create({ userID: user, language: 'en_UK' })];
+                    case 2:
+                        data = _a.sent();
+                        _a.label = 3;
+                    case 3: return [2 /*return*/, data.get('language')];
                 }
             });
         });

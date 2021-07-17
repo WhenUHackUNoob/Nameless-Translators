@@ -85,7 +85,7 @@ var StatsCommand = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         if (!!args[0]) return [3 /*break*/, 2];
-                        return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, 'general.usage', '<usage>', "" + __1.config.prefix + this.usage)];
+                        return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, 'general.usage', 'usage', "" + __1.config.prefix + this.usage)];
                     case 1:
                         langKey = _a.sent();
                         if (!langKey)

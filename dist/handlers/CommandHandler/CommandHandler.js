@@ -62,6 +62,7 @@ var path_1 = __importDefault(require("path"));
 var BaseCommand_1 = __importDefault(require("./BaseCommand"));
 var Prefixes_1 = __importDefault(require("../../constants/Prefixes"));
 var __1 = require("../..");
+var LanguageManager_1 = __importDefault(require("../LanguageManager/LanguageManager"));
 var CommandHandler = /** @class */ (function (_super) {
     __extends(CommandHandler, _super);
     function CommandHandler(config) {
@@ -91,7 +92,7 @@ var CommandHandler = /** @class */ (function (_super) {
                     return __generator(this, function (_b) {
                         switch (_b.label) {
                             case 0:
-                                _b.trys.push([0, 6, , 7]);
+                                _b.trys.push([0, 7, , 8]);
                                 // Do not respond to bots or dm messages
                                 if (!msg.guild)
                                     return [2 /*return*/];
@@ -134,22 +135,27 @@ var CommandHandler = /** @class */ (function (_super) {
                                 }
                                 _b.label = 2;
                             case 2:
-                                _b.trys.push([2, 4, , 5]);
-                                return [4 /*yield*/, commandData.run(cmd, args, msg)];
+                                _b.trys.push([2, 5, , 6]);
+                                // Run language manager to make sure base language for the user exists
+                                return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, "general.usage")];
                             case 3:
+                                // Run language manager to make sure base language for the user exists
                                 _b.sent();
-                                return [3 /*break*/, 5];
+                                return [4 /*yield*/, commandData.run(cmd, args, msg)];
                             case 4:
+                                _b.sent();
+                                return [3 /*break*/, 6];
+                            case 5:
                                 e_1 = _b.sent();
                                 msg.reply('Somemething went wrong! ' + e_1.message);
                                 console.error(e_1);
-                                return [3 /*break*/, 5];
-                            case 5: return [3 /*break*/, 7];
-                            case 6:
+                                return [3 /*break*/, 6];
+                            case 6: return [3 /*break*/, 8];
+                            case 7:
                                 e_2 = _b.sent();
                                 console.error(e_2);
-                                return [3 /*break*/, 7];
-                            case 7: return [2 /*return*/];
+                                return [3 /*break*/, 8];
+                            case 8: return [2 /*return*/];
                         }
                     });
                 }); });

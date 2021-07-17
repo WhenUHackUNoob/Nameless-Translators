@@ -79,7 +79,7 @@ var PingCommand = /** @class */ (function (_super) {
                     case 1:
                         message = _a.sent();
                         ping = message.createdTimestamp - msg.createdTimestamp;
-                        return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, 'general.ping', '<PING>', "" + ping, '<API>', "" + Math.round(__1.client.ws.ping))];
+                        return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, 'general.ping', 'ping', "" + ping, 'api', "" + Math.round(__1.client.ws.ping))];
                     case 2:
                         langKey = _a.sent();
                         if (!langKey)

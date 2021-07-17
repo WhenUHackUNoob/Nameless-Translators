@@ -81,7 +81,7 @@ var PingCommand = /** @class */ (function (_super) {
                     case 1:
                         language_info = _b.sent();
                         current_language = language_info === null || language_info === void 0 ? void 0 : language_info.get('language');
-                        return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, 'lang.current_language', '<language>', current_language)];
+                        return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, 'lang.current_language', 'language', current_language)];
                     case 2:
                         langKey_1 = _b.sent();
                         if (!langKey_1)
@@ -92,7 +92,7 @@ var PingCommand = /** @class */ (function (_super) {
                         available_languages = Object.keys(LanguageManager_1.default.languageMap).map(function (c) { return c.toLowerCase(); });
                         language = args[0];
                         if (!!available_languages.includes(language.toLowerCase())) return [3 /*break*/, 5];
-                        return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, "lang.invalid_language", '<languages>', Object.keys(LanguageManager_1.default.languageMap).map(function (c) { return "`" + c + "`"; }).join(', '))];
+                        return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, "lang.invalid_language", 'languages', Object.keys(LanguageManager_1.default.languageMap).map(function (c) { return "`" + c + "`"; }).join(', '))];
                     case 4:
                         langKey_2 = _b.sent();
                         if (!langKey_2)
@@ -115,7 +115,7 @@ var PingCommand = /** @class */ (function (_super) {
                     case 8:
                         _i++;
                         return [3 /*break*/, 6];
-                    case 9: return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, 'lang.changed_language', '<language>', translatedLang)];
+                    case 9: return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, 'lang.changed_language', 'language', translatedLang)];
                     case 10:
                         langKey = _b.sent();
                         if (!langKey)
