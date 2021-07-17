@@ -1,0 +1,19 @@
+{
+	"general": {
+		"usage": "Gebruik: `<usage>`",
+		"ping": "🏓Latentie is <PING>ms. API Latentie is <API>ms"
+	},
+
+	"stats": {
+		"no_data_found": "Geen data gevonden voor de opgegeven taal.",
+		"no_country_found": "Ik kon het land niet vinden dat je opgaf.",
+		"choose_country_emote": "Reageer alsjeblieft op dit bericht met het getal van je taal.",
+		"choose_country_emote_title": "Taal Selectie"
+	},
+
+	"lang": {
+		"current_language": "Je huidige taal is: `<language>`",
+		"invalid_language": "Ik ken de taal niet die je opgaf. Je kan kiezen uit: <languages>",
+		"changed_language": "Je taal is successvol gewijzigd naar `<language>`"
+	}
+}

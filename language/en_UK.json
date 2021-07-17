@@ -9,5 +9,11 @@
 		"no_country_found": "I could not find the country you provided.",
 		"choose_country_emote": "Please react on this message with an emote selecting a country.",
 		"choose_country_emote_title": "Language Selection"
+	},
+
+	"lang": {
+		"current_language": "Your current language is `<language>`",
+		"invalid_language": "I do not know of the language provided. You can choose from: <languages>",
+		"changed_language": "Successfully changed your language to `<language>`"
 	}
 }

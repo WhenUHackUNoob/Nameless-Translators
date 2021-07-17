@@ -6,7 +6,28 @@ import Prefixes from "../../constants/Prefixes";
 import LanguageModel from "../../db/model/LanguageModel";
 
 export default class LanguageManager {
-	private static languages: Collection<string, any> = new Collection();
+	public static languages: Collection<string, any> = new Collection();
+	public static languageMap = {
+		"Czech": "cs_CZ",
+		"German": "de_DE",
+		"Greek": "el_GR",
+		"EnglishUK": "en_UK",
+		"EnglishUS": "en_US",
+		"Spanish": "es_419",
+		"SpanishES": "es_ES",
+		"French": "fr_FR",
+		"Hungarian": "hu_HU",
+		"Italian": "it_IT",
+		"Lithuanian": "lt_LT",
+		"Norwegian": "nb_NO",
+		"Dutch": "nl_NL",
+		"Polish": "pl_PL",
+		"Romanian": "ro_RO",
+		"Russian": "ru_RU",
+		"Slovak": "sk_SK",
+		"Turkish": "tr_TR",
+		"Chinese(Simplified)": "zh_CN",
+	}
 
 	public static loadLanguages(dir: string) {
 		const languageFiles = fs.readdirSync(dir);
@@ -16,27 +37,36 @@ export default class LanguageManager {
 				const json = JSON.parse(file);
 				if (!json) continue;
 
-				this.languages.set(languageFile.split('.')[0].split('_')[0], json);
+				this.languages.set(languageFile.split('.')[0], json);
 				console.log(Prefixes.LANGUAGE + `loaded language: ` + languageFile.split('.')[0]);
 			} catch (ignored) {}
 		}
 	}
 
 	public static async getString(user: string, key: string, ...placeholders: string[]) : Promise<string | undefined> {
-		let data = await LanguageModel.findOne({ where: { userID: user }});
-		if (!data) {
-			data = await LanguageModel.create({ userID: user, language: 'en' });
+		
+		// This is some horrible code but I cba to do it better rn
+		let languageCode;
+		if (user == "fallback") {
+			languageCode = "en_UK";
+		} else {
+			let data = await LanguageModel.findOne({ where: { userID: user }});
+			if (!data) {
+				data = await LanguageModel.create({ userID: user, language: 'en_UK' });
+			}
+			languageCode = data.get('language') as string;
 		}
 
-		const languageCode = data.get('language') as string;
-		const languageData = this.languages.get(languageCode.toLowerCase());
+		const languageData = this.languages.get(languageCode);
+		if (!languageData) return this.getString("fallback", key, ...placeholders);
+		
 		const keys = key.split('.');
 		let result = languageData;
 		for (const key of keys) {
 			result = result[key];
 			if (!result) {
-				console.log(Prefixes.LANGUAGE + `No language key found for: ${key}`)
-				return undefined;
+				console.log(Prefixes.LANGUAGE + `No language key found for: ${key}`);
+				return this.getString("fallback", key, ...placeholders);
 			}
 		}
 
