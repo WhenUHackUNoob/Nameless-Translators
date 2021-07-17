@@ -1,7 +1,7 @@
 {
 	"general": {
-		"usage": "Usage: `<usage>`",
-		"ping": "🏓Latency is <PING>ms. API Latency is <API>ms"
+		"usage": "Usage: `{usage}`",
+		"ping": "🏓Latency is {ping}ms. API Latency is {api}ms"
 	},
 
 	"stats": {
@@ -12,8 +12,8 @@
 	},
 
 	"lang": {
-		"current_language": "Your current language is `<language>`",
-		"invalid_language": "I do not know of the language provided. You can choose from: <languages>",
-		"changed_language": "Successfully changed your language to `<language>`"
+		"current_language": "Your current language is `{language}`",
+		"invalid_language": "I do not know of the language provided. You can choose from: {languages}",
+		"changed_language": "Successfully changed your language to `{language}`"
 	}
 }

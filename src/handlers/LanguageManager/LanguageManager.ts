@@ -5,6 +5,8 @@ import Prefixes from "../../constants/Prefixes";
 
 import LanguageModel from "../../db/model/LanguageModel";
 
+const DEFAULT_LANGUAGE = "en_UK"
+
 export default class LanguageManager {
 	public static languages: Collection<string, any> = new Collection();
 	public static languageMap = {
@@ -45,38 +47,50 @@ export default class LanguageManager {
 
 	public static async getString(user: string, key: string, ...placeholders: string[]) : Promise<string | undefined> {
 		
-		// This is some horrible code but I cba to do it better rn
-		let languageCode;
-		if (user == "fallback") {
-			languageCode = "en_UK";
-		} else {
-			let data = await LanguageModel.findOne({ where: { userID: user }});
-			if (!data) {
-				data = await LanguageModel.create({ userID: user, language: 'en_UK' });
-			}
-			languageCode = data.get('language') as string;
-		}
 
-		const languageData = this.languages.get(languageCode);
-		if (!languageData) return this.getString("fallback", key, ...placeholders);
+		const language = await this.getLanguage(user);
+		let translations = this.languages.get(language);
 		
-		const keys = key.split('.');
-		let result = languageData;
-		for (const key of keys) {
-			result = result[key];
-			if (!result) {
-				console.log(Prefixes.LANGUAGE + `No language key found for: ${key}`);
-				return this.getString("fallback", key, ...placeholders);
-			}
+		let translation = this.getTranslation(translations, key);
+		if (!translation) {
+			translations = this.languages.get(DEFAULT_LANGUAGE);
+			translation = this.getTranslation(translations, key);
+		}
+		
+		if (!translation) {
+			// We are already the default translation so the term is not set
+			console.log(Prefixes.BOT + `Term '${key}' is missing from default (${DEFAULT_LANGUAGE}) translation`)
+			return undefined;
 		}
 
 		for (let i = 0; i < placeholders.length; i += 2) {
 			const k = placeholders[i];
 			const v = placeholders[i + 1];
-
-			result = result.replace(k, v);
+			
+			translation = translation.split("{" + k + "}").join(v); // .replaceAll doesn't exist so I guess we use this
 		}
 
-		return result as string;
+		return translation;
+	}
+
+	private static getTranslation(json: any, key: string) {
+		const keys = key.split('.');
+		let result = json;
+		for (const k of keys) {
+			result = result[k];
+			if (!result) {
+				console.log(Prefixes.LANGUAGE + `No language key found for: ${key}`);
+				return undefined;
+			}
+		}
+		return result;
+	}
+
+	private static async getLanguage(user: string) {
+		let data = await LanguageModel.findOne({ where: { userID: user }});
+		if (!data) {
+			data = await LanguageModel.create({ userID: user, language: 'en_UK' });
+		}
+		return data.get('language') as string;
 	}
 }

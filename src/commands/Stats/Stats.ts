@@ -31,7 +31,7 @@ export default class StatsCommand extends Command {
 
 	async run (_: string, args: string[], msg: Message) : Promise<any> {
 		if (!args[0]) {
-			const langKey = await LanguageManager.getString(msg.author.id, 'general.usage', '<usage>', `${config.prefix}${this.usage}`);
+			const langKey = await LanguageManager.getString(msg.author.id, 'general.usage', 'usage', `${config.prefix}${this.usage}`);
 			if (!langKey) return msg.reply('We encountered an error. Please try again.');
 			const embed = Embeds.error(langKey);
 

@@ -17,7 +17,7 @@ export default class PingCommand extends BaseCommand {
 		const message = await msg.channel.send('Pong!');
 		const ping = message.createdTimestamp - msg.createdTimestamp;
 
-		const langKey = await LanguageManager.getString(msg.author.id, 'general.ping', '<PING>', `${ping}`, '<API>', `${Math.round(client.ws.ping)}`)
+		const langKey = await LanguageManager.getString(msg.author.id, 'general.ping', 'ping', `${ping}`, 'api', `${Math.round(client.ws.ping)}`)
 		if (!langKey) return msg.channel.send('We encountered an error. Please try again.')
 
 		await message.edit({ embeds: [ Embeds.success(langKey)] });

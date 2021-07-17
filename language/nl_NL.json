@@ -1,7 +1,7 @@
 {
 	"general": {
-		"usage": "Gebruik: `<usage>`",
-		"ping": "🏓Latentie is <PING>ms. API Latentie is <API>ms"
+		"usage": "Gebruik: `{usage}`",
+		"ping": "🏓Latentie is {ping}ms. API Latentie is {api}ms"
 	},
 
 	"stats": {
@@ -12,8 +12,8 @@
 	},
 
 	"lang": {
-		"current_language": "Je huidige taal is: `<language>`",
-		"invalid_language": "Ik ken de taal niet die je opgaf. Je kan kiezen uit: <languages>",
-		"changed_language": "Je taal is successvol gewijzigd naar `<language>`"
+		"current_language": "Je huidige taal is: `{language}`",
+		"invalid_language": "Ik ken de taal niet die je opgaf. Je kan kiezen uit: {languages}",
+		"changed_language": "Je taal is successvol gewijzigd naar `{language}`"
 	}
 }
