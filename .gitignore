@@ -106,3 +106,5 @@ typings/
 
 src/db/database.sqlite
 dist/db/database.sqlite
+
+dist/
