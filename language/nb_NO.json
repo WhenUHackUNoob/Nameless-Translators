@@ -1,1 +1,16 @@
-{}
+{
+    "lang": {
+        "changed_language": "Språket ditt har nå blitt endret til `{language}`",
+        "current_language": "Ditt nåværende språk er `{language}`",
+        "invalid_language": "Jeg vet ikke hvilket språket det er. Du kan velge mellom: {languages}"
+    },
+    "general": {
+        "usage": "Bruk: `{usage}`",
+        "ping": "🏓 Ventetiden er {ping} ms. API-ventetiden er {api} ms"
+    },
+    "stats": {
+        "no_data_found": "Ingen data ble funnet for det angitte språket",
+        "no_country_found": "Jeg kunne ikke finne landet du oppga.",
+        "choose_country_emote_title": "Språkvalg"
+    }
+}
