@@ -11,6 +11,7 @@
     "stats": {
         "no_data_found": "Ingen data ble funnet for det angitte språket",
         "no_country_found": "Jeg kunne ikke finne landet du oppga.",
-        "choose_country_emote_title": "Språkvalg"
+        "choose_country_emote_title": "Språkvalg",
+        "choose_country_emote": "Vennligst reager på denne meldingen med et uttrykksikon for å velge et land."
     }
 }
