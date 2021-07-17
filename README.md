@@ -1,2 +1,3 @@
 # Nameless-Translators
-discord bot for nameless translators
+Discord bot for Nameless Translators discord server.
+Contributors in CONTRIBUTORS.md
