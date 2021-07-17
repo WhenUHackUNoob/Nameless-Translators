@@ -1,0 +1,10 @@
+{
+	"prefix": ".",
+	"modules": {
+		"misc": true,
+		"stats": true
+	},
+	"owners": [
+		"<insert owner ID here>"
+	]
+}

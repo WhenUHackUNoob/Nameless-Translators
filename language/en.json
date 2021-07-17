@@ -1,0 +1,9 @@
+{
+	"general": {
+		"usage": "Usage: `<usage>`"
+	},
+
+	"stats": {
+		"no_data_found": "No data was found for the specified language"
+	}
+}
