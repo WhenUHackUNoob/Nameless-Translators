@@ -57,6 +57,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var __1 = require("../..");
 var Embeds_1 = __importDefault(require("../../constants/Embeds"));
 var BaseCommand_1 = __importDefault(require("../../handlers/CommandHandler/BaseCommand"));
+var LanguageManager_1 = __importDefault(require("../../handlers/LanguageManager/LanguageManager"));
 var PingCommand = /** @class */ (function (_super) {
     __extends(PingCommand, _super);
     function PingCommand() {
@@ -69,17 +70,22 @@ var PingCommand = /** @class */ (function (_super) {
         this.usage = "ping";
         this.category = "misc";
     };
-    PingCommand.prototype.run = function (_, _args, msg) {
+    PingCommand.prototype.run = function (_, args, msg) {
         return __awaiter(this, void 0, void 0, function () {
-            var message, ping;
+            var message, ping, langKey;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, msg.channel.send('Pong!')];
                     case 1:
                         message = _a.sent();
                         ping = message.createdTimestamp - msg.createdTimestamp;
-                        return [4 /*yield*/, message.edit({ embeds: [Embeds_1.default.success("\uD83C\uDFD3Latency is " + ping + "ms. API Latency is " + Math.round(__1.client.ws.ping) + "ms")] })];
+                        return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, 'general.ping', '<PING>', "" + ping, '<API>', "" + Math.round(__1.client.ws.ping))];
                     case 2:
+                        langKey = _a.sent();
+                        if (!langKey)
+                            return [2 /*return*/, msg.channel.send('We encountered an error. Please try again.')];
+                        return [4 /*yield*/, message.edit({ embeds: [Embeds_1.default.success(langKey)] })];
+                    case 3:
                         _a.sent();
                         return [2 /*return*/];
                 }

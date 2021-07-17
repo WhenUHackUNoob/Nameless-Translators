@@ -1,6 +1,7 @@
 {
 	"general": {
-		"usage": "Usage: `<usage>`"
+		"usage": "Usage: `<usage>`",
+		"ping": "🏓Latency is <PING>ms. API Latency is <API>ms"
 	},
 
 	"stats": {
