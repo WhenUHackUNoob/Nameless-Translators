@@ -1,9 +1,0 @@
-{
-    "token": "TOKEN",
-    "prefix": "!",
-    "ownerId": "701782413788971070",
-
-    "modules": {
-        "Core": true
-    }
-}
