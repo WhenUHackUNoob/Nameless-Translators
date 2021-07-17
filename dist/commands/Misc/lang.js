@@ -55,6 +55,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var BaseCommand_1 = __importDefault(require("../../handlers/CommandHandler/BaseCommand"));
+var LanguageModel_1 = __importDefault(require("../../db/model/LanguageModel"));
+var LanguageManager_1 = __importDefault(require("../../handlers/LanguageManager/LanguageManager"));
+var Embeds_1 = __importDefault(require("../../constants/Embeds"));
 var PingCommand = /** @class */ (function (_super) {
     __extends(PingCommand, _super);
     function PingCommand() {
@@ -67,11 +70,60 @@ var PingCommand = /** @class */ (function (_super) {
         this.usage = "lang <language>";
         this.category = "misc";
     };
-    PingCommand.prototype.run = function (_, _args, msg) {
+    PingCommand.prototype.run = function (_, args, msg) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                msg.channel.send("Waiting for Supernoober100 to do his magic");
-                return [2 /*return*/];
+            var language_info, current_language, langKey_1, embed_1, available_languages, language, langKey_2, embed_2, translatedLang, _i, _a, lang, lang_key, langKey, embed;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        if (!!args[0]) return [3 /*break*/, 3];
+                        return [4 /*yield*/, LanguageModel_1.default.findOne({ where: { userID: msg.author.id } })];
+                    case 1:
+                        language_info = _b.sent();
+                        current_language = language_info === null || language_info === void 0 ? void 0 : language_info.get('language');
+                        return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, 'lang.current_language', '<language>', current_language)];
+                    case 2:
+                        langKey_1 = _b.sent();
+                        if (!langKey_1)
+                            return [2 /*return*/, msg.channel.send('We encountered an error. Please try again.')];
+                        embed_1 = Embeds_1.default.success(langKey_1);
+                        return [2 /*return*/, msg.channel.send({ embeds: [embed_1] })];
+                    case 3:
+                        available_languages = Object.keys(LanguageManager_1.default.languageMap).map(function (c) { return c.toLowerCase(); });
+                        language = args[0];
+                        if (!!available_languages.includes(language.toLowerCase())) return [3 /*break*/, 5];
+                        return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, "lang.invalid_language", '<languages>', Object.keys(LanguageManager_1.default.languageMap).map(function (c) { return "`" + c + "`"; }).join(', '))];
+                    case 4:
+                        langKey_2 = _b.sent();
+                        if (!langKey_2)
+                            return [2 /*return*/, msg.channel.send('Something went wrong.')];
+                        embed_2 = Embeds_1.default.error(langKey_2);
+                        return [2 /*return*/, msg.channel.send({ embeds: [embed_2] })];
+                    case 5:
+                        _i = 0, _a = Object.keys(LanguageManager_1.default.languageMap);
+                        _b.label = 6;
+                    case 6:
+                        if (!(_i < _a.length)) return [3 /*break*/, 9];
+                        lang = _a[_i];
+                        if (!(lang.toLowerCase() == args[0])) return [3 /*break*/, 8];
+                        translatedLang = lang;
+                        lang_key = LanguageManager_1.default.languageMap[lang];
+                        return [4 /*yield*/, LanguageModel_1.default.update({ language: lang_key }, { where: { userID: msg.author.id } })];
+                    case 7:
+                        _b.sent();
+                        _b.label = 8;
+                    case 8:
+                        _i++;
+                        return [3 /*break*/, 6];
+                    case 9: return [4 /*yield*/, LanguageManager_1.default.getString(msg.author.id, 'lang.changed_language', '<language>', translatedLang)];
+                    case 10:
+                        langKey = _b.sent();
+                        if (!langKey)
+                            return [2 /*return*/, msg.channel.send('Something went wrong.')];
+                        embed = Embeds_1.default.success(langKey);
+                        msg.channel.send({ embeds: [embed] });
+                        return [2 /*return*/];
+                }
             });
         });
     };
