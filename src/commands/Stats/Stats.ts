@@ -1,4 +1,4 @@
-import { Message, MessageReaction, User } from 'discord.js';
+import { Message, MessageEmbed, MessageReaction, User } from 'discord.js';
 import Command from "../../handlers/CommandHandler/BaseCommand";
 import LanguageManager from '../../handlers/LanguageManager/LanguageManager';
 import { config } from '../..';
@@ -26,7 +26,7 @@ export default class StatsCommand extends Command {
 	async run (_: string, args: string[], msg: Message) : Promise<any> {
 		if (!args[0]) {
 			const langKey = await LanguageManager.getString(msg.author.id, 'general.usage', '<usage>', `${config.prefix}${this.usage}`);
-			if (!langKey) return msg.reply('something went wrong');
+			if (!langKey) return msg.reply('We encountered an error. Please try again.');
 			const embed = Embeds.error(langKey);
 
 			return msg.channel.send({ embeds: [ embed ]});
@@ -42,14 +42,22 @@ export default class StatsCommand extends Command {
 			
 			if (weblateResponse.detail) {
 				const langKey = await LanguageManager.getString(msg.author.id, 'stats.no_data_found');
-				if (!langKey) return msg.reply('Something went wrong');
+				if (!langKey) return msg.reply('We encountered an error. Please try again.');
 
 				const embed = Embeds.error(langKey);
 				return msg.channel.send({ embeds: [ embed ]});
 			}
 		}
 
-		msg.channel.send(JSON.stringify(weblateResponse, null, 4))
+		let userFriendlyResponse = JSON.stringify(weblateResponse, null, 4)
+		const embed = new MessageEmbed()
+			.setTitle(`Statistics: ${weblateResponse.name}`)
+			.setColor("GREEN")
+			.setTimestamp()
+			.setDescription(userFriendlyResponse)
+			.setFooter(`Requested by ${msg.author.username}#${msg.author.discriminator}`)
+		
+		msg.channel.send({ embeds: [ embed ]})
 	}
 
 	async extractLanguageCode(args: string[], msg: Message) {
@@ -58,7 +66,10 @@ export default class StatsCommand extends Command {
 			const url = `https://restcountries.eu/rest/v2/name/${encodeURIComponent(country)}`;
 			const countryInfo = await fetch(url).then((res) => res.json()).then((res) => res[0]);
 
-			if (!countryInfo) return msg.channel.send({ embeds: [ Embeds.error('No country was found with that name') ] });
+			const langKey = await LanguageManager.getString(msg.author.id, 'stats.no_country_found')
+			if(!langKey) return msg.channel.send('We encountered an error. Please try again.')
+
+			if (!countryInfo) return msg.channel.send({ embeds: [ Embeds.error(langKey) ] });
 
 			const languages = countryInfo.languages as languageInfo[];
 			let languageCode;

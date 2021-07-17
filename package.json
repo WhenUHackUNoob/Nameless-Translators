@@ -23,6 +23,7 @@
     "discord.js": "^13.0.0-dev.fe6cc0c.1625227356",
     "dotenv": "^10.0.0",
     "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.12",
     "sequelize": "^6.6.4",
     "sqlite3": "^5.0.2",
     "timestring": "^6.0.0"

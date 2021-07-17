@@ -4,6 +4,7 @@
 	},
 
 	"stats": {
-		"no_data_found": "No data was found for the specified language"
+		"no_data_found": "No data was found for the specified language",
+		"no_country_found": "I could not find the country you provided."
 	}
 }
