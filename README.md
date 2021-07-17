@@ -1,2 +1,2 @@
-# Event-Bot
-Discord bot made in Discord event sessions
+# Nameless-Translators
+discord bot for nameless translators
