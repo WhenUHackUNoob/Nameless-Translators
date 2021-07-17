@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/WhenUHackUNoob/Nameless-Translators#readme",
   "dependencies": {
+    "canvas": "^2.8.0",
     "chalk": "^4.1.1",
     "discord.js": "^13.0.0-dev.fe6cc0c.1625227356",
     "dotenv": "^10.0.0",

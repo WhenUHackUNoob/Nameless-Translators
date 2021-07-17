@@ -1,11 +1,17 @@
-import { Message, MessageEmbed, MessageReaction, User } from 'discord.js';
+import { Message, MessageAttachment, MessageEmbed, MessageReaction, User } from 'discord.js';
 import Command from "../../handlers/CommandHandler/BaseCommand";
 import LanguageManager from '../../handlers/LanguageManager/LanguageManager';
 import { config } from '../..';
 import Embeds from '../../constants/Embeds';
 import fetch from 'node-fetch';
 
+// @ts-ignore
+import Canvas from 'canvas';
+import path from 'path';
+
 const discord_emotes = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"];
+const FONT_FILE = "roboto.ttf";
+const FONT = "roboto";
 
 interface languageInfo {
 	iso639_1: string
@@ -49,15 +55,8 @@ export default class StatsCommand extends Command {
 			}
 		}
 
-		let userFriendlyResponse = JSON.stringify(weblateResponse, null, 4)
-		const embed = new MessageEmbed()
-			.setTitle(`Statistics: ${weblateResponse.name}`)
-			.setColor("GREEN")
-			.setTimestamp()
-			.setDescription(userFriendlyResponse)
-			.setFooter(`Requested by ${msg.author.username}#${msg.author.discriminator}`)
-		
-		msg.channel.send({ embeds: [ embed ]})
+		const attachment = await this.generateImage(weblateResponse) as MessageAttachment;
+		msg.channel.send({ files: [ attachment ]})
 	}
 
 	async extractLanguageCode(args: string[], msg: Message) {
@@ -101,12 +100,41 @@ export default class StatsCommand extends Command {
 				const collected = await message.awaitReactions({ filter, time: 60 * 1000, max: 1 });
 				const reaction = collected.first();
 				if (!reaction || !reaction.emoji) return;
-
+				
+				message.reactions.removeAll();
 				const index = discord_emotes.indexOf(reaction.emoji.name!);
 				languageCode = languages[index].iso639_1;
 			} 
 
 			resolve(languageCode);
+		})
+	}
+
+
+	async generateImage(json: any) {
+		return new Promise(async (resolve) => {
+			
+			Canvas.registerFont(path.join(__dirname, `../../../public/fonts/${FONT_FILE}`), { family: `${FONT}` });
+			
+			const canvas = Canvas.createCanvas(400, 165);
+			const ctx = canvas.getContext('2d');
+
+			const background = await Canvas.loadImage(path.join(__dirname, '../../../public/img/stats_background.png'));
+			ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+			ctx.font = `36px "${FONT}"`;
+			ctx.fillStyle = "#ffffff";
+			ctx.fillText(json.name, 15, 41);
+
+			ctx.font = `12px "${FONT}"`;
+
+			ctx.fillText(`${json.total} / ${json.translated} (${json.translated_percent}%)`, 150, 88);
+			ctx.fillText(`${json.total_words} / ${json.translated_words} (${json.translated_words_percent}%)`, 150, 108);
+			ctx.fillText(json.comments, 150, 128);
+			ctx.fillText(json.suggestions, 150, 148);
+
+			const attachment = new MessageAttachment(canvas.toBuffer(), 'language-stats.png');
+			resolve(attachment);
 		})
 	}
 }
