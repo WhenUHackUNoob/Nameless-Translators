@@ -27,9 +27,9 @@ export default class PingCommand extends BaseCommand {
 		// New language selection
 		
 		const available_languages = Object.keys(LanguageManager.languageMap).map(c => c.toLowerCase());
-		const language = args[0];
+		const language = args[0].toLowerCase();
 	
-		if (!available_languages.includes(language.toLowerCase())) {
+		if (!available_languages.includes(language)) {
 			const langKey = await LanguageManager.getString(msg.author.id, "lang.invalid_language", 'languages', Object.keys(LanguageManager.languageMap).map(c => `\`${c}\``).join(', '));
 			if (!langKey) return msg.channel.send('Something went wrong.');
 			
@@ -40,10 +40,10 @@ export default class PingCommand extends BaseCommand {
 		// Get the language code
 		let translatedLang: string;
 		for (const lang of Object.keys(LanguageManager.languageMap)) {
-			if (lang.toLowerCase() == args[0]) {
+			if (lang.toLowerCase() == language) {
 				translatedLang = lang;
 				//@ts-ignore
-				const lang_key = LanguageManager.languageMap[lang]
+				const lang_key = LanguageManager.languageMap[lang];
 				await LanguageModel.update({ language: lang_key }, { where: { userID: msg.author.id }});
 			}
 		}
