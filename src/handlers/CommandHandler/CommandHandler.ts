@@ -10,6 +10,7 @@ import Command from "./BaseCommand";
 import Prefixes from '../../constants/Prefixes';
 
 import { config as configJSON } from '../..';
+import LanguageManager from "../LanguageManager/LanguageManager";
 
 export default
 class CommandHandler extends EventEmitter {
@@ -95,6 +96,8 @@ class CommandHandler extends EventEmitter {
 
 				//	Try and catch for errors
 				try {
+					// Run language manager to make sure base language for the user exists
+					await LanguageManager.getString(msg.author.id, "general.usage");
 					await commandData.run(cmd, args, msg);
 				}
 				catch(e) {
