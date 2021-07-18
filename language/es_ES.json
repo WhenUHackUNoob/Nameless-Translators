@@ -1,1 +1,17 @@
-{}
+{
+    "general": {
+        "usage": "Uso: `{usage}`",
+        "ping": "🏓La latencia es de {ping}ms. La latencia de la API es de {api}ms"
+    },
+    "stats": {
+        "no_data_found": "No se han encontrado datos para el idioma especificado",
+        "no_country_found": "No he podido encontrar el país que has proporcionado.",
+        "choose_country_emote": "Por favor, reacciona a este mensaje con un emoticono para seleccionar un idioma.",
+        "choose_country_emote_title": "Selección de idioma"
+    },
+    "lang": {
+        "current_language": "Su idioma actual es `{language}`",
+        "invalid_language": "No sé de la lengua proporcionada. Puede elegir entre: {languages}",
+        "changed_language": "Ha cambiado con éxito su idioma a `{language}`"
+    }
+}
