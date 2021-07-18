@@ -5,7 +5,7 @@
     },
     "stats": {
         "no_data_found": "Pro zadaný jazyk nebyla nalezena žádná data",
-        "choose_country_emote": "Zareagujte na tuto zprávu se smajlíkem pro výběr země.",
+        "choose_country_emote": "Zareagujte na tuto zprávu se smajlíkem pro výběr jazyka.",
         "choose_country_emote_title": "Výběr jazyka",
         "no_country_found": "Zadanou zemi jsem nenašel."
     },
