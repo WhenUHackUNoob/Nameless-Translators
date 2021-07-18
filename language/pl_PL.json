@@ -1,1 +1,17 @@
-{}
+{
+    "lang": {
+        "current_language": "Twój obecny język to `{language}`",
+        "invalid_language": "Nie znam podanego języka. Do wyboru: {languages}",
+        "changed_language": "Pomyślnie zmieniono język na `{language}`"
+    },
+    "general": {
+        "usage": "Stosowanie: `{usage}`",
+        "ping": "🏓Czas oczekiwania jest {ping}ms. Czas oczekiwania API jest {api}ms"
+    },
+    "stats": {
+        "no_data_found": "Nie znaleziono danych dla określonego języka",
+        "no_country_found": "Nie mogłem znaleść kraju którego wpisałeś.",
+        "choose_country_emote": "Proszę zareagować na tę wiadomość emotką, aby wybrać kraj.",
+        "choose_country_emote_title": "Selekcja Kraju"
+    }
+}
