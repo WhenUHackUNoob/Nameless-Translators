@@ -1,1 +1,17 @@
-{}
+{
+    "general": {
+        "usage": "用法: `{usage}`",
+        "ping": "🏓目前延迟为 {ping}ms。API 延迟为 {api}ms"
+    },
+    "stats": {
+        "no_data_found": "选定的语言没有数据",
+        "no_country_found": "找不到您提供的地区。",
+        "choose_country_emote": "选择表情便可以选择地区。",
+        "choose_country_emote_title": "语言选择"
+    },
+    "lang": {
+        "current_language": "您目前的语言是 `{language}`",
+        "invalid_language": "找不到您提供的语言。您可选择以下语言: {languages}",
+        "changed_language": "成功切换语言为 `{language}`"
+    }
+}
