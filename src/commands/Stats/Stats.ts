@@ -128,8 +128,8 @@ export default class StatsCommand extends Command {
 
 			ctx.font = `12px "${FONT}"`;
 
-			ctx.fillText(`${json.total} / ${json.translated} (${json.translated_percent}%)`, 150, 88);
-			ctx.fillText(`${json.total_words} / ${json.translated_words} (${json.translated_words_percent}%)`, 150, 108);
+			ctx.fillText(`${json.translated} / ${json.total} (${json.translated_percent}%)`, 150, 88);
+			ctx.fillText(`${json.translated_words} / ${json.total_words} (${json.translated_words_percent}%)`, 150, 108);
 			ctx.fillText(json.comments, 150, 128);
 			ctx.fillText(json.suggestions, 150, 148);
 
