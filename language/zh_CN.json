@@ -6,7 +6,7 @@
     "stats": {
         "no_data_found": "选定的语言没有数据",
         "no_country_found": "找不到您提供的地区。",
-        "choose_country_emote": "选择表情便可以选择地区。",
+        "choose_country_emote": "请选择表情来选择语言。",
         "choose_country_emote_title": "语言选择"
     },
     "lang": {
