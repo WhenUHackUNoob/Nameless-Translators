@@ -1,1 +1,17 @@
-{}
+{
+    "general": {
+        "usage": "שימוש: `{usage}`",
+        "ping": "🏓 הפינק הוא {ping} . הפינק ב - API הוא {api} ms"
+    },
+    "stats": {
+        "no_data_found": "לא נמצאו נתונים עבור השפה שצוינה",
+        "no_country_found": "לא מצאתי את המדינה שסיפקת.",
+        "choose_country_emote": "אנא הגיב להודעה זו באמצעות emote לבחירת שפה.",
+        "choose_country_emote_title": "בחירת שפה"
+    },
+    "lang": {
+        "current_language": "השפה הנוכחית שלך היא `{language}`",
+        "invalid_language": "אני לא יודע את השפה הניתנת. תוכלו לבחור מבין: {languages}",
+        "changed_language": "שינתה בהצלחה את השפה שלך ל - `{language}`"
+    }
+}

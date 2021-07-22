@@ -4,7 +4,7 @@
         "ping": "🏓Latentie is {ping}ms. API Latentie is {api}ms"
     },
     "stats": {
-        "no_data_found": "Geen data gevonden voor de opgegeven taal.",
+        "no_data_found": "Geen data gevonden voor de opgegeven taal",
         "no_country_found": "Ik kon het land niet vinden dat je opgaf.",
         "choose_country_emote": "Reageer alsjeblieft op dit bericht met een emoji om een taal te kiezen.",
         "choose_country_emote_title": "Taal Selectie"
