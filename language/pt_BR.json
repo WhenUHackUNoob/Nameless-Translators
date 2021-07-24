@@ -1,1 +1,17 @@
-{}
+{
+    "lang": {
+        "invalid_language": "Eu não conheço o idioma fornecido. Você pode escolher entre: {languages}",
+        "changed_language": "O seu idioma foi mudado com sucesso para `{language}`",
+        "current_language": "O seu idioma atual é `{language}`"
+    },
+    "general": {
+        "ping": "🏓A latência é {ping}ms. A latência da API é {api}ms",
+        "usage": "Use: `{usage}`"
+    },
+    "stats": {
+        "no_data_found": "Nenhum dado foi encontrado para o idioma especificado",
+        "no_country_found": "Não consegui encontrar o país que você forneceu.",
+        "choose_country_emote": "Reaja a esta mensagem com um emote para selecionar um idioma.",
+        "choose_country_emote_title": "Seleção de idioma"
+    }
+}
