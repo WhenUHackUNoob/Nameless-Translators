@@ -29,6 +29,7 @@ export default class LanguageManager {
 		"Slovak": "sk_SK",
 		"Turkish": "tr_TR",
 		"Chinese(Simplified)": "zh_CN",
+		"Portuguese": "pt_BR"
 	}
 
 	public static loadLanguages(dir: string) {
