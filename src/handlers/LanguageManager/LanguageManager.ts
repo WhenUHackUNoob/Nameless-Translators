@@ -90,7 +90,7 @@ export default class LanguageManager {
 	private static async getLanguage(user: string) {
 		let data = await LanguageModel.findOne({ where: { userID: user }});
 		if (!data) {
-			data = await LanguageModel.create({ userID: user, language: 'en_UK' });
+			data = await LanguageModel.create({ userID: user, language: DEFAULT_LANGUAGE });
 		}
 		return data.get('language') as string;
 	}
