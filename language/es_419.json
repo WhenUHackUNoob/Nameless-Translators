@@ -6,7 +6,7 @@
     "stats": {
         "no_data_found": "No se encontraron datos para el idioma especificado",
         "no_country_found": "No pude encontrar el país que proporcionaste.",
-        "choose_country_emote": "Responda a este mensaje con un emoji seleccionando un país.",
+        "choose_country_emote": "Por favor, a este mensaje con un emoticono para seleccionar un país y un idioma.",
         "choose_country_emote_title": "Selección de idioma"
     },
     "lang": {
