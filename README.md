@@ -2,6 +2,9 @@
 Discord bot for Nameless Translators discord server.
 Contributors in CONTRIBUTORS.md
 
+## For contributors
+
+To have the slash commands work in your (testing) server, head to the command handler and change the guild ID in the command loading part to your own server its ID. 
 
 To do list:
 

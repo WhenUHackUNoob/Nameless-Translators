@@ -1,25 +1,14 @@
-import { Message, PermissionResolvable } from 'discord.js';
+import { ApplicationCommandData, ApplicationCommandPermissionData, ApplicationCommandPermissions, CommandInteraction, Message, PermissionResolvable } from 'discord.js';
 import UID from '../../util/uid';
-const defaultPermissionMessage = "You don't have the required permission to do this.";
 
 export default 
-class Command {
+class BaseCommand {
 	public id: UID | null = null;
 
-	public name: string = "Unnamed";
 	public category: string = "No category";
-	public description: string = "No description";
-	public usage: string = "No usage";
+	public commandData: ApplicationCommandData | undefined;
+	public permissions: ApplicationCommandPermissionData[] | undefined;
 	
-	public command: string = "No command";
-	public aliases: string[] = [];
-
-	public permissions: PermissionResolvable | null = null;
-	public permissionMessage: string = defaultPermissionMessage;
-	
-	public hidden: boolean = false;
-	public ownerOnly: boolean = false;
-
 	preSetup(id: UID) {
 		this.id = id;
 		this.setup();
@@ -35,9 +24,7 @@ class Command {
 	 * @param {Message} msg The message object
 	 * @param {String[]} args The arguments provided
 	 */
-	async run(_: string, __: string[], msg: Message) {
-		msg.reply('This command doesn\'t do anything, please report this to an administrator'
-		+ '\n name: ' + this.name
-		+ '\n cmd: '  + this.command);
+	async run(ctx: CommandInteraction) {
+		ctx.reply('This command is not set up. This is probably an error');
 	}
 }

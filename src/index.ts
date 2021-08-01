@@ -3,7 +3,7 @@
 //
 require('dotenv').config();
 
-import { Client, Intents } from 'discord.js';
+import { Client } from 'discord.js';
 import path from "path";
 import { readFileSync } from 'fs';
 
@@ -17,11 +17,8 @@ console.log(Prefixes.BOT + "Starting discord client");
 const config = JSON.parse(readFileSync(path.join(__dirname, '../config.json'), 'utf-8'));
 
 const client = new Client({
-	messageCacheLifetime: 20,
-	messageCacheMaxSize: 10,
-	messageSweepInterval: 100,
 	partials: ["REACTION", "MESSAGE", "CHANNEL", "GUILD_MEMBER", "USER"],
-	intents: Intents.NON_PRIVILEGED
+	intents: ["GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILDS"]
 });
 
 const commandHandler = new CommandHandler({ ignoreToken: '@' });
@@ -33,6 +30,7 @@ export {
 }
 
 new EventHandler(path.join(__dirname, './events'))
-commandHandler.loadDir(path.join(__dirname, './commands'));
+client.on('ready', () => commandHandler.loadDir(path.join(__dirname, './commands')))
+
 
 client.login(process.env.BOTTOKEN);

@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { CommandInteraction, Message } from "discord.js";
 import BaseCommand from "../../handlers/CommandHandler/BaseCommand";
 import LanguageModel from "../../db/model/LanguageModel";
 import LanguageManager from "../../handlers/LanguageManager/LanguageManager";
@@ -6,35 +6,40 @@ import Embeds from "../../constants/Embeds";
 
 export default class PingCommand extends BaseCommand {
 	setup() {
-		this.name = "lang";
-		this.command = "lang";
-		this.description = "Select your language!"
-		this.usage = "lang <language>";
-		this.category = "misc";
+		this.commandData = {
+			name: 'lang',
+			description: 'Change your language for the bot.',
+			options: [
+				{
+					name: 'lang',
+					description: 'The language you want to choose',
+					type: 'STRING'
+				}
+			]
+		}
 	}
 
-	async run (_: string, args: string[], msg: Message) : Promise<any> {
-		if (!args[0]) {
-			const language_info = await LanguageModel.findOne({ where: { userID: msg.author.id }});
+	async run (ctx: CommandInteraction) : Promise<any> {
+		if (!ctx.options.get('lang')) {
+			const language_info = await LanguageModel.findOne({ where: { userID: ctx.user.id }});
 			const current_language = language_info?.get('language') as string;
-			const langKey = await LanguageManager.getString(msg.author.id, 'lang.current_language', 'language', current_language);
-			if(!langKey) return msg.channel.send('We encountered an error. Please try again.');
+			const langKey = await LanguageManager.getString(ctx.user.id, 'lang.current_language', 'language', current_language);
+			if(!langKey) return ctx.reply('We encountered an error. Please try again.');
 
 			const embed = Embeds.success(langKey);
-			return msg.channel.send({ embeds: [ embed ] });
+			return ctx.reply({ embeds: [ embed ] });
 		}
 
 		// New language selection
 		
 		const available_languages = Object.keys(LanguageManager.languageMap).map(c => c.toLowerCase());
-		const language = args[0].toLowerCase();
-	
-		if (!available_languages.includes(language)) {
-			const langKey = await LanguageManager.getString(msg.author.id, "lang.invalid_language", 'languages', Object.keys(LanguageManager.languageMap).map(c => `\`${c}\``).join(', '));
-			if (!langKey) return msg.channel.send('Something went wrong.');
+		const { value: language } = ctx.options.get('lang')!;
+		if (!available_languages.includes(language as string)) {
+			const langKey = await LanguageManager.getString(ctx.user.id, "lang.invalid_language", 'languages', Object.keys(LanguageManager.languageMap).map(c => `\`${c}\``).join(', '));
+			if (!langKey) return ctx.reply('Something went wrong.');
 			
 			const embed = Embeds.error(langKey);
-			return msg.channel.send({embeds: [ embed ]})
+			return ctx.reply({embeds: [ embed ]})
 		}
 
 		// Get the language code
@@ -44,14 +49,14 @@ export default class PingCommand extends BaseCommand {
 				translatedLang = lang;
 				//@ts-ignore
 				const lang_key = LanguageManager.languageMap[lang];
-				await LanguageModel.update({ language: lang_key }, { where: { userID: msg.author.id }});
+				await LanguageModel.update({ language: lang_key }, { where: { userID: ctx.user.id }});
 			}
 		}
 
-		const langKey = await LanguageManager.getString(msg.author.id, 'lang.changed_language', 'language', translatedLang!);
-		if (!langKey) return msg.channel.send('Something went wrong.');
+		const langKey = await LanguageManager.getString(ctx.user.id, 'lang.changed_language', 'language', translatedLang!);
+		if (!langKey) return ctx.reply('Something went wrong.');
 
 		const embed = Embeds.success(langKey);
-		msg.channel.send({ embeds: [ embed ]});
+		ctx.reply({ embeds: [ embed ]});
 	}
 }

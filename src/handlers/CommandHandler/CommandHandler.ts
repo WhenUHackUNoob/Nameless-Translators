@@ -7,10 +7,6 @@ import { EventEmitter } from 'events';
 import fs from 'fs';
 import path from 'path';
 import Command from "./BaseCommand";
-import Prefixes from '../../constants/Prefixes';
-
-import { config as configJSON } from '../..';
-import LanguageManager from "../LanguageManager/LanguageManager";
 
 export default
 class CommandHandler extends EventEmitter {
@@ -19,7 +15,6 @@ class CommandHandler extends EventEmitter {
 	setup: boolean = false;
 
 	//	Command data
-	public aliases: Map<string, UID> = new Map<string, UID>();
 	public commands: Map<string, UID> = new Map<string, UID>();
 	public commandData: Map<UID, Command> = new Map<UID, Command>();
 
@@ -38,78 +33,23 @@ class CommandHandler extends EventEmitter {
 
 	private async start() {
 		if(this.setup) return;
+		bot.on('interactionCreate', async (interaction) => {
+			if (!interaction.isCommand()) return;
+			if (!interaction.guild) return;
 
-		//	This listens for the commands
-		bot.on('message', async (msg: Message) : Promise<any> => {
+			const cmd = this.commands.get(interaction.commandName);
+			if (!cmd) throw new Error(`Interaction with name ${interaction.commandName} was not found in the command list!`);
+			const cmdData = this.commandData.get(cmd)!;
+
+			//	Try and catch for errors
 			try {
-
-				// Do not respond to bots or dm messages
-				if(!msg.guild) return;
-				if(msg.author.bot) return;
-				
-				const prefix = configJSON.prefix;
-				if (!prefix) return console.log(Prefixes.BOT + "no prefix provided. Please configure this in the config.json");
-				
-
-				//	Checking if the command starts witht he bot prefix
-				if(!msg.content.toLowerCase().startsWith(prefix.trim().toLowerCase()) && !msg.content.startsWith(`<@${bot.user!.id}>`)) return;
-				//	Defining constants
-				const args: string[] = msg.content.substring(prefix.length).split(/ +/);
-				const cmd: string | undefined = args.shift()!.toLowerCase();
-
-				//	Emit event
-				if(!cmd) return this.emit('invalidCommand', cmd, args, msg);
-
-				//	Getting command
-				let command = this.commands.get(cmd);
-				if(command == null) {
-				
-					//	If not set, check aliases
-					command = this.aliases.get(cmd);
-
-					//	Emit event of command non exist
-					if(command == null)
-						return this.emit('invalidCommand', cmd, args, msg);
-				}
-
-				//	Get Command
-				const commandData: Command = this.commandData.get(command)!;
-
-				if (commandData.ownerOnly) {
-					if (!configJSON.owners.includes(msg.author.id)) {
-						return msg.reply(commandData.permissionMessage);
-					}
-				}
-
-				if (!configJSON.modules[commandData.category.toLowerCase()]) {
-					return;
-				}
-
-				//	Checking permissions
-				if(commandData.permissions != null && !configJSON.owners.includes(msg.author.id)) {
-					const member = (await msg.guild.members.fetch(msg.author.id))!;
-
-					if(!member.permissions.has(commandData.permissions)) {
-						return msg.reply(commandData.permissionMessage);
-					}
-				}
-
-				//	Try and catch for errors
-				try {
-					// Run language manager to make sure base language for the user exists
-					await LanguageManager.getString(msg.author.id, "general.usage");
-					await commandData.run(cmd, args, msg);
-				}
-				catch(e) {
-					msg.reply('Somemething went wrong! ' + e.message);
-					console.error(e);
-				}
+				await cmdData.run(interaction);
 			}
 			catch(e) {
+				interaction.reply('Somemething went wrong! ' + e.message);
 				console.error(e);
 			}
-		});
-
+		})
 		this.setup = true;
 	}
 
@@ -128,14 +68,18 @@ class CommandHandler extends EventEmitter {
 		//	adding command to the database
 		this.commandData.set(id, cmd);
 
-		//	adding a new command
-		if(this.commands.get(cmd.command.toLowerCase()) != null) throw new TypeError('Error: command ' + cmd.command + ' is already defined.');
-		this.commands.set(cmd.command.toLowerCase(), id);
+		if (!cmd.commandData?.name) throw new TypeError("Command name cannot be undefined");
+		if (!cmd.commandData?.description) throw new TypeError("Command description cannot be undefined");
 
-		//	adding the aliases
-		cmd.aliases.forEach((a: string) => {
-			this.aliases.set(a.toLowerCase(), id);
-		});
+		//	adding a new command
+		if(this.commands.get(cmd.commandData?.name) != null) throw new TypeError('Error: command ' + cmd.commandData.name + ' is already created.');
+		this.commands.set(cmd.commandData.name, id);
+
+		const applicationCommand = await (await bot.guilds.fetch('737390815281807421')).commands.create(cmd.commandData);
+
+		if (cmd.permissions) {
+			await applicationCommand.permissions.add({ permissions: cmd.permissions });
+		}
 	}
 
 	/**

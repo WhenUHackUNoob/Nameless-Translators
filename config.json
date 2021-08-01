@@ -1,9 +1,4 @@
 {
-	"prefix": "!",
-	"modules": {
-		"misc": true,
-		"stats": true
-	},
 	"owners": [
 		"701782413788971070"
 	]
