@@ -1,4 +1,4 @@
-import { CommandInteraction, Message } from "discord.js";
+import { CommandInteraction, Message, MessageActionRow, MessageSelectMenu } from "discord.js";
 import BaseCommand from "../../handlers/CommandHandler/BaseCommand";
 import LanguageModel from "../../db/model/LanguageModel";
 import LanguageManager from "../../handlers/LanguageManager/LanguageManager";
@@ -8,55 +8,50 @@ export default class PingCommand extends BaseCommand {
 	setup() {
 		this.commandData = {
 			name: 'lang',
-			description: 'Change your language for the bot.',
-			options: [
-				{
-					name: 'lang',
-					description: 'The language you want to choose',
-					type: 'STRING'
-				}
-			]
+			description: 'Change your language for the bot.'
 		}
 	}
 
 	async run (ctx: CommandInteraction) : Promise<any> {
-		if (!ctx.options.get('lang')) {
-			const language_info = await LanguageModel.findOne({ where: { userID: ctx.user.id }});
-			const current_language = language_info?.get('language') as string;
-			const langKey = await LanguageManager.getString(ctx.user.id, 'lang.current_language', 'language', current_language);
-			if(!langKey) return ctx.reply('We encountered an error. Please try again.');
+		await ctx.defer();
 
-			const embed = Embeds.success(langKey);
-			return ctx.reply({ embeds: [ embed ] });
-		}
+		const language_info = await LanguageModel.findOne({ where: { userID: ctx.user.id }});
+		const current_language = language_info?.get('language') as string;
+		const available_languages = Object.keys(LanguageManager.languageMap)
+
+		
+		const row = new MessageActionRow();
+		row.addComponents(
+			new MessageSelectMenu()
+				.setCustomId('select')
+				.setPlaceholder(current_language)
+				.addOptions(available_languages.map(c => { return { label: c, description: `Select ${c} as your language`, value: c } }))
+		);
+
+		const embed = Embeds.success((await LanguageManager.getString(ctx.user.id, 'lang.select_language'))!);
+		ctx.editReply({ embeds: [ embed ], components: [ row ]});
 
 		// New language selection
+		const filter = (i: any) => {
+			i.deferUpdate();
+			return i.user.id === ctx.user.id;
+		};
 		
-		const available_languages = Object.keys(LanguageManager.languageMap).map(c => c.toLowerCase());
-		const { value: language } = ctx.options.get('lang')!;
-		if (!available_languages.includes((language as string).toLowerCase())) {
-			const langKey = await LanguageManager.getString(ctx.user.id, "lang.invalid_language", 'languages', Object.keys(LanguageManager.languageMap).map(c => `\`${c}\``).join(', '));
-			if (!langKey) return ctx.reply('Something went wrong.');
-			
-			const embed = Embeds.error(langKey);
-			return ctx.reply({embeds: [ embed ]})
-		}
+		const response = await ctx.channel?.awaitMessageComponent({
+			filter,
+			componentType: 'SELECT_MENU',
+			time: 60 * 1000
+		});
 
-		// Get the language code
-		let translatedLang: string;
-		for (const lang of Object.keys(LanguageManager.languageMap)) {
-			if (lang.toLowerCase() == (language as string).toLowerCase()) {
-				translatedLang = lang;
-				//@ts-ignore
-				const lang_key = LanguageManager.languageMap[lang];
-				await LanguageModel.update({ language: lang_key }, { where: { userID: ctx.user.id }});
-			}
-		}
+		if (!response) return;
 
-		const langKey = await LanguageManager.getString(ctx.user.id, 'lang.changed_language', 'language', translatedLang!);
-		if (!langKey) return ctx.reply('Something went wrong.');
+		const language = (LanguageManager.languageMap as any)[response.values[0]];
+		await LanguageModel.update({ language }, { where: { userID: ctx.user.id }});
 
-		const embed = Embeds.success(langKey);
-		ctx.reply({ embeds: [ embed ]});
+		const langKey = await LanguageManager.getString(ctx.user.id, 'lang.changed_language', 'language', response.values[0]);
+		if (!langKey) return ctx.editReply('Something went wrong.');
+
+		const embed2 = Embeds.success(langKey);
+		ctx.editReply({ embeds: [ embed2 ], components: [] });
 	}
 }

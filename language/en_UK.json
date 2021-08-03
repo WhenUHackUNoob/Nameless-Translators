@@ -12,8 +12,7 @@
 	},
 
 	"lang": {
-		"current_language": "Your current language is `{language}`",
-		"invalid_language": "I do not know of the language provided. You can choose from: {languages}",
+		"select_language": "Select the language you want to the bot to be in.",
 		"changed_language": "Successfully changed your language to `{language}`"
 	}
 }
