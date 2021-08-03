@@ -2,7 +2,8 @@
     "lang": {
         "invalid_language": "Eu não conheço o idioma fornecido. Você pode escolher entre: {languages}",
         "changed_language": "O seu idioma foi mudado com sucesso para `{language}`",
-        "current_language": "O seu idioma atual é `{language}`"
+        "current_language": "O seu idioma atual é `{language}`",
+        "select_language": "Selecione o idioma em que deseja que o bot esteja."
     },
     "general": {
         "ping": "🏓A latência é {ping}ms. A latência da API é {api}ms",
