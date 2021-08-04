@@ -12,6 +12,7 @@
     "lang": {
         "current_language": "Váš současný jazyk je `{language}`",
         "changed_language": "Váš jazyk byl úspěšně změněn na `{language}`",
-        "invalid_language": "Takový jazyk neznám. Můžete si vybrat z: {languages}"
+        "invalid_language": "Takový jazyk neznám. Můžete si vybrat z: {languages}",
+        "select_language": "Vyberte jazyk, ve kterém chcete mít bota."
     }
 }
