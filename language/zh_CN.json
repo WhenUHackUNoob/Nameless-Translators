@@ -12,6 +12,7 @@
     "lang": {
         "current_language": "您目前的语言是 `{language}`",
         "invalid_language": "找不到您提供的语言。您可选择以下语言: {languages}",
-        "changed_language": "成功切换语言为 `{language}`"
+        "changed_language": "成功切换语言为 `{language}`",
+        "select_language": "请选择机器人的语言。"
     }
 }
