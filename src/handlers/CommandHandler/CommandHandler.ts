@@ -69,7 +69,7 @@ class CommandHandler extends EventEmitter {
 		this.commandData.set(id, cmd);
 
 		if (!cmd.commandData?.name) throw new TypeError("Command name cannot be undefined");
-		if (!cmd.commandData?.description) throw new TypeError("Command description cannot be undefined");
+		if (!cmd.commandData) throw new TypeError("Command description cannot be undefined");
 
 		//	adding a new command
 		if(this.commands.get(cmd.commandData?.name) != null) throw new TypeError('Error: command ' + cmd.commandData.name + ' is already created.');

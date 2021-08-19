@@ -13,10 +13,12 @@ export default class PingCommand extends BaseCommand {
 	}
 
 	async run (ctx: CommandInteraction) : Promise<any> {
-		await ctx.defer();
+		await ctx.deferReply();
+		
+		const embed = Embeds.success((await LanguageManager.getString(ctx.user.id, 'lang.select_language'))!);
 
 		const language_info = await LanguageModel.findOne({ where: { userID: ctx.user.id }});
-		const current_language = language_info?.get('language') as string;
+		const current_language = String(language_info?.get('language'));
 		const available_languages = Object.keys(LanguageManager.languageMap)
 
 		
@@ -28,7 +30,6 @@ export default class PingCommand extends BaseCommand {
 				.addOptions(available_languages.map(c => { return { label: c, description: `Select ${c} as your language`, value: c } }))
 		);
 
-		const embed = Embeds.success((await LanguageManager.getString(ctx.user.id, 'lang.select_language'))!);
 		ctx.editReply({ embeds: [ embed ], components: [ row ]});
 
 		// New language selection
