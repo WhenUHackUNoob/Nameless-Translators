@@ -1,1 +1,17 @@
-{}
+{
+    "lang": {
+        "changed_language": "言語を`{language}`へ変更することに成功しました",
+        "current_language": "現在の言語は`{language}`です",
+        "invalid_language": "提供された言語を知りません。次の中から選択できます: {言語}"
+    },
+    "general": {
+        "usage": "使い方: `{usage}`",
+        "ping": "🏓レイテンシは{ping}msです。APIレイテンシは{api}msです。"
+    },
+    "stats": {
+        "no_data_found": "指定された言語のデータが見つかりませんでした",
+        "no_country_found": "提供された国を見つけることができませんでした。",
+        "choose_country_emote": "このメッセージにエモートで反応して、言語を選択してください。",
+        "choose_country_emote_title": "言語選択"
+    }
+}

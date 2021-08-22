@@ -12,6 +12,7 @@
     "lang": {
         "current_language": "Текущий язык `{language}`",
         "invalid_language": "Я не знаю этот язык. Выберите язык из предложенных: {languages}",
-        "changed_language": "Выбран язык `{language}`"
+        "changed_language": "Выбран язык `{language}`",
+        "select_language": "Выберите язык который вы бы хотели использовать."
     }
 }
