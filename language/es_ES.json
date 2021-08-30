@@ -12,6 +12,7 @@
     "lang": {
         "current_language": "Su idioma actual es `{language}`",
         "invalid_language": "No sé de la lengua proporcionada. Puede elegir entre: {languages}",
-        "changed_language": "Ha cambiado con éxito su idioma a `{language}`"
+        "changed_language": "Ha cambiado con éxito su idioma a `{language}`",
+        "select_language": "Selecciona el idioma en el que quieres que esté el bot."
     }
 }
