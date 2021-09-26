@@ -2,7 +2,8 @@
     "lang": {
         "changed_language": "言語を`{language}`へ変更することに成功しました",
         "current_language": "現在の言語は`{language}`です",
-        "invalid_language": "提供された言語を知りません。次の中から選択できます: {言語}"
+        "invalid_language": "提供された言語を知りません。次の中から選択できます: {言語}",
+        "select_language": "ボットの言語を選択してください。"
     },
     "general": {
         "usage": "使い方: `{usage}`",
