@@ -64,7 +64,7 @@ export default class StatsCommand extends Command {
 		return new Promise(async (resolve) => {
 			const { value } = ctx.options.get('code')!;
 			const country = encodeURIComponent(value as string);			
-			const url = `https://restcountries.eu/rest/v2/name/${encodeURIComponent(country)}`;
+			const url = `https://restcountries.com/v2/name/${encodeURIComponent(country)}`;
 			const countryInfo = await fetch(url).then((res) => res.json()).then((res) => res[0]);
 
 			const langKey = await LanguageManager.getString(ctx.user.id, 'stats.no_country_found')
