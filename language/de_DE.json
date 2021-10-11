@@ -1,1 +1,16 @@
-{}
+{
+    "general": {
+        "usage": "Nutzung: `{usage}`",
+        "ping": "🏓Die Latenz beträgt {ping}ms. Die API-Latenz beträgt {api}ms"
+    },
+    "lang": {
+        "select_language": "Wählen Sie die Sprache aus, in der der Bot sein soll.",
+        "changed_language": "Ihre Sprache wurde erfolgreich in `{language}` geändert"
+    },
+    "stats": {
+        "no_country_found": "Ich konnte das von Ihnen angegebene Land nicht finden.",
+        "choose_country_emote": "Bitte reagieren Sie auf diese Nachricht mit einem Emoji, um eine Sprache auszuwählen.",
+        "choose_country_emote_title": "Sprachauswahl",
+        "no_data_found": "Für die angegebene Sprache wurden keine Daten gefunden"
+    }
+}
