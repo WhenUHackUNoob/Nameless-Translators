@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: ./
+      - uses: supercrafter100/Pterodactyl-Restart@v1.0
         with:
           PTE_PANEL_URL: ${{ secrets.PTE_PANEL_URL }}
           PTE_BEARER_TOKEN: ${{ secrets.PTE_BEARER_TOKEN }}
