@@ -45,7 +45,7 @@ class CommandHandler extends EventEmitter {
 			try {
 				await cmdData.run(interaction);
 			}
-			catch(e) {
+			catch(e: any) {
 				interaction.reply('Somemething went wrong! ' + e.message);
 				console.error(e);
 			}
