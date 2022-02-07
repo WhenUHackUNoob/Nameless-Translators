@@ -13,7 +13,7 @@ export default class PingCommand extends BaseCommand {
 	}
 
 	async run (ctx: CommandInteraction) : Promise<any> {
-		await ctx.deferReply();
+		await ctx.deferReply({ ephemeral: true });
 		
 		const embed = Embeds.success((await LanguageManager.getString(ctx.user.id, 'lang.select_language'))!);
 
