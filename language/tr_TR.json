@@ -1,1 +1,16 @@
-{}
+{
+    "general": {
+        "usage": "Kullanım: `{usage}`",
+        "ping": "🏓 Gecikmem {ping}ms. API gecikmesi {api}ms"
+    },
+    "lang": {
+        "select_language": "Bot'daki istediniz dili seçiniz.",
+        "changed_language": "Başarıyla botun diliniz `{language}` olarak ayarlandı"
+    },
+    "stats": {
+        "no_data_found": "Girilen dil için bir veri bulunamadı",
+        "no_country_found": "Girdiğiniz ülkeyi bulamadım.",
+        "choose_country_emote": "Lütfen Dil seçmek için bu mesaja tepki ekleyiniz.",
+        "choose_country_emote_title": "Dil seçimi"
+    }
+}
