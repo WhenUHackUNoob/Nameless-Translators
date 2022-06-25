@@ -1,1 +1,16 @@
-{}
+{
+    "lang": {
+        "select_language": "Vyberte jazyk, v ktorom má byť bot.",
+        "changed_language": "Váš jazyk bol úspešne zmenený na `{language}`"
+    },
+    "general": {
+        "usage": "Využitie: `{usage}`",
+        "ping": "🏓Latencia je {ping}ms. Latencia API je {api}ms"
+    },
+    "stats": {
+        "no_data_found": "Pre zadaný jazyk sa nenašli žiadne údaje",
+        "no_country_found": "Krajinu, ktorú ste uviedli, som nenašiel.",
+        "choose_country_emote_title": "Výber jazyka",
+        "choose_country_emote": "Ak chcete vybrať jazyk, reagujte na túto správu pomocou emoji."
+    }
+}
