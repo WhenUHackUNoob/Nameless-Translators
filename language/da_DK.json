@@ -1,1 +1,16 @@
-{}
+{
+    "general": {
+        "ping": "🏓Reaktionstiden er {ping}ms. API reaktionstiden er {api}ms",
+        "usage": "Brug: `{usage}`"
+    },
+    "stats": {
+        "no_data_found": "Der blev ikke fundet nogen data for det angivet sprog",
+        "no_country_found": "Jeg kunne ikke finde det land, du har angivet.",
+        "choose_country_emote": "Reager venligst på denne besked for at vælge et sprog.",
+        "choose_country_emote_title": "Valg af Sprog"
+    },
+    "lang": {
+        "select_language": "Vælg det sprog, du vil have botten til at være.",
+        "changed_language": "Dit sprog blev ændret til `{language}`"
+    }
+}
