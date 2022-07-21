@@ -1,0 +1,16 @@
+{
+    "general": {
+        "usage": "Usage: `{usage}`",
+        "ping": "🏓Latency is {ping}ms. API Latency is {api}ms"
+    },
+    "stats": {
+        "no_data_found": "No data was found for the specified language",
+        "no_country_found": "I could not find the country you provided.",
+        "choose_country_emote": "Please react on this message with an emote to select a language.",
+        "choose_country_emote_title": "Language Selection"
+    },
+    "lang": {
+        "changed_language": "Successfully changed your language to `{language}`",
+        "select_language": "Select the language you want to the bot to be in."
+    }
+}

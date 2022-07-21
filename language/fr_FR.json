@@ -1,1 +1,16 @@
-{}
+{
+    "lang": {
+        "select_language": "Sélectionnez la langue dans laquelle vous souhaitez que le robot soit utilisé.",
+        "changed_language": "Vous avez réussi à changer votre langue en `{language}`"
+    },
+    "general": {
+        "usage": "Utilisation : `{usage}`",
+        "ping": "🏓La latence est de {ping}ms. La latence de l'API est de {api}ms"
+    },
+    "stats": {
+        "no_country_found": "Je n'ai pas pu trouver le pays que vous avez indiqué.",
+        "choose_country_emote": "Veuillez réagir à ce message avec un emote pour sélectionner une langue.",
+        "choose_country_emote_title": "Sélection de la langue",
+        "no_data_found": "Aucune donnée n'a été trouvée pour la langue spécifiée"
+    }
+}

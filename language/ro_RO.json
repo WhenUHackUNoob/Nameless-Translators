@@ -1,1 +1,16 @@
-{}
+{
+    "lang": {
+        "select_language": "Selectați limba pe care doriți să o folosească bot-ul.",
+        "changed_language": "Ați schimbat cu succes limba in `{language}`"
+    },
+    "general": {
+        "usage": "Utilizare: `{usage}`",
+        "ping": "🏓Latența este de {ping}ms. Latența API este de {api}ms"
+    },
+    "stats": {
+        "no_data_found": "Nu au fost găsite date pentru limba specificată",
+        "no_country_found": "Nu am putut găsi țara pe care ați furnizat-o.",
+        "choose_country_emote": "Vă rugăm să reacționați la acest mesaj cu un emoji pentru a selecta o limbă.",
+        "choose_country_emote_title": "Selectarea limbii"
+    }
+}

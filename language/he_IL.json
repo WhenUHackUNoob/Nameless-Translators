@@ -12,6 +12,7 @@
     "lang": {
         "current_language": "השפה הנוכחית שלך היא `{language}`",
         "invalid_language": "אני לא יודע את השפה הניתנת. תוכלו לבחור מבין: {languages}",
-        "changed_language": "שינתה בהצלחה את השפה שלך ל - `{language}`"
+        "changed_language": "שינתה בהצלחה את השפה שלך ל - `{language}`",
+        "select_language": "בחר את השפה שבה אתה רוצה שהבוט יהיה."
     }
 }
