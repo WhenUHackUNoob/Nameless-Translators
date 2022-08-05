@@ -1,1 +1,16 @@
-{}
+{
+    "general": {
+        "usage": "Cách sử dụng: `{usage}`",
+        "ping": "🏓Thời lượng là {ping}ms. Độ trễ API là {api}ms"
+    },
+    "stats": {
+        "no_data_found": "Không tìm thấy dữ liệu nào cho ngôn ngữ được chỉ định",
+        "no_country_found": "Tôi không thể tìm thấy quốc gia bạn đã cung cấp.",
+        "choose_country_emote": "Vui lòng phản ứng lại tin nhắn này bằng một biểu tượng cảm xúc để chọn ngôn ngữ.",
+        "choose_country_emote_title": "Lựa chọn ngôn ngữ"
+    },
+    "lang": {
+        "changed_language": "Đã thay đổi thành công ngôn ngữ của bạn thành `{language}`",
+        "select_language": "Chọn ngôn ngữ bạn muốn bot sử dụng."
+    }
+}
