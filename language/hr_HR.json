@@ -1,1 +1,16 @@
-{}
+{
+    "lang": {
+        "select_language": "Odaberite jezik na kojem želite da bot bude.",
+        "changed_language": "Uspješno ste promijenili svoj jezik u `{language}`"
+    },
+    "general": {
+        "ping": "Latencija je {ping}ms. API latencija je {api}ms",
+        "usage": "Korištenje: `{usage}`"
+    },
+    "stats": {
+        "no_data_found": "Nisu pronađeni podaci za navedeni jezik",
+        "choose_country_emote": "Molimo vas da reagirate na ovu poruku emocijom za odabir jezika.",
+        "choose_country_emote_title": "Odabir jezika",
+        "no_country_found": "Nisam mogao pronaći zemlju koju ste naveli."
+    }
+}
