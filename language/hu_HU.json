@@ -1,1 +1,16 @@
-{}
+{
+    "lang": {
+        "select_language": "Válassza ki a nyelvet, amelyen a botot szeretné használni.",
+        "changed_language": "Sikeresen megváltoztattuk a nyelvet `{language}`-re"
+    },
+    "general": {
+        "usage": "Használat: `{usage}`",
+        "ping": "🏓A késleltetés {ping}ms. Az API késleltetés {api}ms"
+    },
+    "stats": {
+        "no_data_found": "A megadott nyelvre vonatkozóan nem találtunk adatokat",
+        "no_country_found": "Nem találtam az Ön által megadott országot.",
+        "choose_country_emote_title": "Nyelvválasztás",
+        "choose_country_emote": "Kérjük, reagálj erre az üzenetre egy emote-val, hogy kiválaszthasd a nyelvet."
+    }
+}
